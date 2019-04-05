@@ -3,9 +3,11 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 const CryptoJS = require('crypto-js');
+// import rcookies from 'react-cookie';
 const Timer = require('../../models/Timer');
 
 router.get('/', (req, res) => {
+  let newCookie = new Cookies({'io': ''});
   Timer.find()
     .sort({date: -1})
     .then(timers => res.json(timers))
@@ -25,6 +27,7 @@ router.get('/user/:user_id', (req, res) => {
 
 
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+  
   console.log(req.headers.cookie.split(';'))
   const d = new RegExp('[^n=][A-Za-z0-9].+');
   let v = req.headers.cookie.split(';')[0];

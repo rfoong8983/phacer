@@ -22,6 +22,8 @@ class Timer extends React.Component {
         this.startTimer = this.startTimer.bind(this)
         this.stopTimer = this.stopTimer.bind(this)
         this.resetTimer = this.resetTimer.bind(this)
+        this.cookies = this.props.cookies;
+        this.allCookies = this.props.allCookies;
     }
 
     test = () => {
@@ -30,6 +32,10 @@ class Timer extends React.Component {
 
     startTimer() {
       this.test();
+      console.log(this.allCookies);
+      this.cookies.set('n', this.state.x);
+      console.log(this.allCookies);
+      // debugger
       this.setState({
         time: this.state.time,
         start: Date.now() - this.state.time ,

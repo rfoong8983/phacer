@@ -1,4 +1,5 @@
 const express = require('express');
+const cookiesMiddleware = require('universal-cookie-express');
 const app = express();
 const db = require('./config/keys').mongoURI;
 const mongoose = require('mongoose');
@@ -18,6 +19,12 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
+app
+  .use(cookiesMiddleware())
+  .use(function(req, res) {
+    req.universalCookies.get('myCat');
+  });
+
 mongoose
   .connect(db, {useNewUrlParser: true})
   .then(() => console.log('Connected to MongoDB successfully'))
@@ -30,6 +37,7 @@ require('./config/passport')(passport);
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
 
 app.use('/api/users', users);
 app.use('/api/rooms', rooms);

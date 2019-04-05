@@ -39,6 +39,7 @@ export const recordTimer = (data, id, a) => dispatch => {
   const s = a;
   let stringifiedData = JSON.stringify(data);
   cookies.set('n', s);
+  debugger
   // stringifiedData = JSON.stringify({time: 12, start: 1200000000000, end: 0, intTime: 12, endTime:"12ms", handle: undefined, isOn: false})
   let encrypted = CryptoJS.AES.encrypt(stringifiedData, id);
   // let decrypted = CryptoJS.AES.decrypt(encrypted, id);
