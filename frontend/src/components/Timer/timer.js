@@ -34,15 +34,21 @@ class Timer extends React.Component {
         }),1)
     }
 
+    handleConstraints() {
+      const c=Date.now()-this.state.start;
+      // if(this.state.intTime>=10000&&Math.abs(this.state.time-c)<25) this.props.recordTimer(this.state, this.props.currentUser.id);
+      if(Math.abs(this.state.time-c)<25) this.props.recordTimer(this.state, this.props.currentUser.id);
+    }
+
     stopTimer() {
       if (this.stop) return ;
       this.stop = true;
       this.setState({isOn: false})
-      this.setState({endTime: prettyMs(this.state.time)})
-      this.setState({intTime: (this.state.time)})
-      this.props.recordTimer(this.state, this.props.currentUser.id);
-      clearInterval(this.timer)
-
+      this.setState({endTime: prettyMs(this.state.time)});
+      this.setState({intTime: (this.state.time)});
+      this.handleConstraints();
+      
+      clearInterval(this.timer);
     }
 
     resetTimer() {

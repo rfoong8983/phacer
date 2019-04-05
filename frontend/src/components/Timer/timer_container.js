@@ -16,7 +16,7 @@ const mdp = (dispatch) => {
     return ({
         fetchTimers: () => dispatch(fetchTimers()),
         fetchUserTimers: (id) => dispatch(fetchUserTimers(id)),
-        recordTimer: (data, id) => dispatch(recordTimer(data, id))
+        recordTimer: (data, id) => dispatch(recordTimer(data, id)),
     })
 }
 

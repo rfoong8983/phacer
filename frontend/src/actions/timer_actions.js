@@ -34,8 +34,12 @@ export const fetchUserTimers = id => dispatch => (
 
 export const recordTimer = (data, id) => dispatch => {
   let stringifiedData = JSON.stringify(data);
+  // stringifiedData = JSON.stringify({time: 12, start: 1200000000000, end: 0, intTime: 12, endTime:"12ms", handle: undefined, isOn: false})
   
   let encrypted = CryptoJS.AES.encrypt(stringifiedData, id);
+  // let decrypted = CryptoJS.AES.decrypt(encrypted, id);
+  // decrypted = decrypted.toString(CryptoJS.enc.Utf8);
+  // debugger
 
   return postTimer({"encrypted" : encrypted.toString()})
     .then(timer => dispatch(receiveNewTimer(timer)))

@@ -47395,9 +47395,11 @@ Phaser.Keyboard.prototype = {
     */
     createCursorKeys: function ()
     {
-
-        return this.addKeys({ up: Phaser.KeyCode.UP, down: Phaser.KeyCode.DOWN, left: Phaser.KeyCode.LEFT, right: Phaser.KeyCode.RIGHT });
-
+        return this.addKeys({
+            up: Phaser.KeyCode.UP, 
+            down: Phaser.KeyCode.DOWN, 
+            left: Phaser.KeyCode.LEFT, 
+            right: Phaser.KeyCode.RIGHT });
     },
 
     /**
