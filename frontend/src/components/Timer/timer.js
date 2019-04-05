@@ -2,6 +2,7 @@ import React from 'react';
 import prettyMs from 'pretty-ms';
 import SinglePlayerContainer from '../single_player/single_player_container';
 import './timer.scss';
+import bcrypt from 'bcryptjs';
 
 class Timer extends React.Component {
     constructor(props){
@@ -9,12 +10,13 @@ class Timer extends React.Component {
         super(props)
 
         this.state = {
+          x: 0,
           time: 0,
           start: 0,
           end: 0,
           intTime: 0,
           isOn: false,
-          handle: this.props.users.handle
+          handle: this.props.users.handle,
         }
 
         this.startTimer = this.startTimer.bind(this)
@@ -22,22 +24,32 @@ class Timer extends React.Component {
         this.resetTimer = this.resetTimer.bind(this)
     }
 
-    startTimer() {
-        this.setState({
-          time: this.state.time,
-          start: Date.now() - this.state.time ,
-          isOn: true,
-          handle: this.props.users.handle
-        })
-        this.timer = setInterval(() => this.setState({
-          time: Date.now() - this.state.start
-        }),1)
+    test = () => {
+      this.state.x = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
+
+    startTimer() {
+      this.test();
+      this.setState({
+        time: this.state.time,
+        start: Date.now() - this.state.time ,
+        isOn: true,
+        handle: this.props.users.handle
+      })
+      this.timer = setInterval(() => this.setState({
+        time: Date.now() - this.state.start
+      }),1)
+    }
+
+    
 
     handleConstraints() {
       const c=Date.now()-this.state.start;
+      
       // if(this.state.intTime>=10000&&Math.abs(this.state.time-c)<25) this.props.recordTimer(this.state, this.props.currentUser.id);
-      if(Math.abs(this.state.time-c)<25) this.props.recordTimer(this.state, this.props.currentUser.id);
+      if(Math.abs(this.state.time-c)<25) this.props.recordTimer(this.state, this.props.currentUser.id, this.state.x);
+      this.test();
+      
     }
 
     stopTimer() {

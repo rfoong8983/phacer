@@ -11,7 +11,7 @@ const App = () => (
     <Modal />
     <Switch>
       <AuthRoute exact path="/" component={MainPageContainer} />
-      <ProtectedRoute exact path="/single_player" component={TimerContainer} />
+      <ProtectedRoute exact path="/single_player" component={TimerContainer}/>
       <ProtectedRoute exact path="/rooms" component={RoomsContainer} />
     </Switch>
   </div>
