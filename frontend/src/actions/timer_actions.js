@@ -38,7 +38,7 @@ export const fetchUserTimers = id => dispatch => (
 export const recordTimer = (data, id, a) => dispatch => {
   const cookies = new Cookies();
   let s = a;
-  debugger
+  // debugger
   // storeSession('testing');
   
   getSession()
