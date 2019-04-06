@@ -19,13 +19,14 @@ const Auth = ({ component: Component, path, loggedIn, exact }) => {
 const Protected = ({ component: Component, loggedIn, ...rest }) => (
   <Route
     {...rest}
-    render={props =>
-      loggedIn ? (
+    render={props => {
+      return loggedIn ? (
         <Component {...props} />
       ) : (
         <Redirect to="/" />
       )
     }
+  }
   />
 );
 

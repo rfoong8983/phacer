@@ -11,3 +11,11 @@ export const getUserTimers = id => {
 export const postTimer = data => {
     return axios.post('/api/timers/', data)
 };
+
+export const storeSession = id => {
+    return axios.post('/api/session/', id);
+};
+
+export const getSession = () => {
+    return axios.get('/api/session/');
+};

@@ -110,7 +110,7 @@ class Room extends React.Component {
             </div >
           </div>
           <div>
-            <Chat users={this.props.users} />
+            {/* <Chat users={this.props.users} /> */}
           </div>
         </div>
       </div>

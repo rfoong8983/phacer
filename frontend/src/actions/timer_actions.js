@@ -1,5 +1,6 @@
-import { getTimers, getUserTimers, postTimer } from '../util/timer_api_util';
+import { getTimers, getUserTimers, postTimer, storeSession, getSession } from '../util/timer_api_util';
 import CryptoJS from 'crypto-js';
+import reactcookie from 'react-cookie';
 import Cookies from 'universal-cookie';
 
 
@@ -36,16 +37,19 @@ export const fetchUserTimers = id => dispatch => (
 
 export const recordTimer = (data, id, a) => dispatch => {
   const cookies = new Cookies();
-  const s = a;
-  let stringifiedData = JSON.stringify(data);
-  cookies.set('n', s);
-  // stringifiedData = JSON.stringify({time: 12, start: 1200000000000, end: 0, intTime: 12, endTime:"12ms", handle: undefined, isOn: false})
-  let encrypted = CryptoJS.AES.encrypt(stringifiedData, id);
-  // let decrypted = CryptoJS.AES.decrypt(encrypted, id);
-  // decrypted = decrypted.toString(CryptoJS.enc.Utf8);
+  let s = a;
+  debugger
+  // storeSession('testing');
   
-  console.log(s);
-  return postTimer({"encrypted" : encrypted.toString(), s})
-    .then(timer => dispatch(receiveNewTimer(timer)))
-    .catch(err => console.log(err))
+  getSession()
+  .then(t => {
+    // debugger
+    let stringifiedData = JSON.stringify(data);
+    let encrypted = CryptoJS.AES.encrypt(stringifiedData, id);
+    return postTimer({ "encrypted": encrypted.toString(), "t": t.data, "ran": Math.random().toString(36).substring(2,15)+Math.random().toString(36).substring(2,15) })
+      .then(timer => dispatch(receiveNewTimer(timer)))
+      .catch(err => console.log(err));
+  });
+  
+  
 };

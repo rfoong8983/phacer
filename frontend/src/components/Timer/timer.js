@@ -22,6 +22,8 @@ class Timer extends React.Component {
         this.startTimer = this.startTimer.bind(this)
         this.stopTimer = this.stopTimer.bind(this)
         this.resetTimer = this.resetTimer.bind(this)
+        this.cookies = this.props.cookies;
+        this.allCookies = this.props.allCookies;
     }
 
     test = () => {
@@ -30,11 +32,13 @@ class Timer extends React.Component {
 
     startTimer() {
       this.test();
+      this.cookies.set('s', this.allCookies.test);
+      // this.cookies.set('s', this.state.x);
       this.setState({
         time: this.state.time,
         start: Date.now() - this.state.time ,
         isOn: true,
-        handle: this.props.users.handle
+        handle: this.props.users.handle,
       })
       this.timer = setInterval(() => this.setState({
         time: Date.now() - this.state.start
@@ -48,6 +52,7 @@ class Timer extends React.Component {
       
       // if(this.state.intTime>=10000&&Math.abs(this.state.time-c)<25) this.props.recordTimer(this.state, this.props.currentUser.id);
       if(Math.abs(this.state.time-c)<25) this.props.recordTimer(this.state, this.props.currentUser.id, this.state.x);
+      // if(Math.abs(this.state.time-c)<25) this.props.recordTimer(this.state, this.props.currentUser.id, this.state.x);
       this.test();
       
     }
