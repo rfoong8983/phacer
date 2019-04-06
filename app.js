@@ -22,11 +22,11 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-app
-  .use(cookiesMiddleware())
-  .use(function(req, res) {
-    req.universalCookies.get('myCat');
-  });
+// app
+//   .use(cookiesMiddleware())
+//   .use(function(req, res) {
+//     req.universalCookies.get('myCat');
+//   });
 
 mongoose
   .connect(db, {useNewUrlParser: true})
